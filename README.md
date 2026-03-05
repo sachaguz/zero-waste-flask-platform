@@ -112,7 +112,7 @@ The application will start locally.
 ## 📸 Screenshots
 
 - Login page
-![Login Page](screenshots\Captura de pantalla 2026-03-05 163642.png)
+![Login Page](screenshots/Captura de pantalla 2026-03-05 163642.png)
 
 - Course view  
 - Course chapters  
