@@ -1,0 +1,91 @@
+{% extends "header.html" %}
+
+{% block content %}
+
+<hr style="margin-top: 60px; margin-bottom: 40px;">
+
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="main-wraper trash-scope">
+  <h3 class="main-title">Papelera</h3>
+
+  <div class="page-head">
+    
+    <span class="chip chip-date"><i class="icofont-warning-alt"></i> Los elementos aquí no aparecen en el blog público.</span>
+  </div>
+
+  {% if rows %}
+  <div class="blog-posts" id="trashList">
+    {% for post, trash in rows %}
+    <div class="blog-posts" style="margin-bottom: 40px;">
+
+    <figure>
+  {% if post.imagen %}
+    <img src="{{ url_for('static', filename='uploads/' ~ post.imagen) }}"
+     alt="Imagen del post"
+     style="width: 300px; height: 200px; object-fit: contain; background-color: #f0f0f0; border-radius: 10px;">
+
+
+  {% else %}
+    <img src="{{ url_for('static', filename='img/blog detail.jpg') }}" alt="Imagen por defecto">
+  {% endif %}
+</figure>
+
+
+    <div class="blog-post-meta">
+      
+      <h4>{{ post.titulo }}</h4>
+      <p>{{ post.subtitulo }}</p>
+	  
+      <div>
+  <span><i class="icofont-clock-time"></i> {{ post.fecha.strftime('%d/%m/%Y') }}</span>
+</div>
+
+<div style="margin-top: 10px; display: flex; gap: 10px; align-items: center;">
+	
+
+{% if current_user.is_authenticated and current_user.es_admin %}
+  <div class="acciones-post">
+    <form action="{{ url_for('restaurar_post', post_id=post.id) }}" method="post" style="display:inline">
+  {# {{ csrf_token() }}  <-- solo si usas Flask-WTF #}
+  <button type="submit" class="button success circle">
+    <i class="icofont-undo"></i> Restaurar
+  </button>
+</form>
+
+    
+    <form action="{{ url_for('destruir_post', post_id=post.id) }}" method="post" style="display:inline"
+                onsubmit="return confirm('¿Eliminar definitivamente? Esta acción no se puede deshacer.');">
+            <button type="submit" class="button danger circle">
+              <i class="icofont-bin"></i> Eliminar
+            </button>
+          </form>
+  </div>
+{% endif %}
+
+
+
+</div>
+
+
+
+
+
+    </div>
+  </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty">
+    <i class="icofont-ui-folder"></i>
+    No hay publicaciones en la papelera.
+  </div>
+  {% endif %}
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

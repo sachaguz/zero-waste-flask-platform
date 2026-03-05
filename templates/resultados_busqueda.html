@@ -1,0 +1,24 @@
+{% extends 'blog.html' %}
+
+{% block content %}
+<div class="main-wraper">
+	<h3>Resultados para: "{{ consulta }}"</h3>
+
+	{% if posts %}
+		{% for post in posts %}
+			<div class="blog-posts">
+				<figure>
+					<img src="{{ url_for('static', filename='uploads/' + post.imagen) }}" alt="">
+				</figure>
+				<div class="blog-post-meta">
+					<h4>{{ post.titulo }}</h4>
+					<p>{{ post.subtitulo }}</p>
+					<a href="{{ url_for('ver_post', post_id=post.id) }}" class="button primary circle">Leer más</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>No se encontraron resultados.</p>
+	{% endif %}
+</div>
+{% endblock %}

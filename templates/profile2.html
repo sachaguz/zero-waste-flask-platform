@@ -1,0 +1,71 @@
+{% extends "header.html" %}
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+<section class="py-4">
+  <div class="container">
+    <h2 class="mb-3">Hola, {{ usuario.nombre_completo or usuario.nombre }}</h2>
+    {% if usuario.pais %}<p class="text-muted mb-4">País: {{ usuario.pais }}</p>{% endif %}
+
+    <div class="row g-4">
+      <!-- Posts del usuario -->
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mb-3">Mis publicaciones</h4>
+            {% if posts %}
+              <ul class="list-group list-group-flush">
+                {% for p in posts %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-0">
+                    <a href="{{ url_for('ver_post', post_id=p.id) }}"><strong>{{ p.titulo }}</strong></a>
+                    <div class="small text-muted">{{ p.fecha.strftime('%d/%m/%Y') if p.fecha else '' }}</div>
+                  </div>
+                  <div class="ms-3">
+                    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('ver_post', post_id=p.id) }}">Ver</a>
+                    {% if current_user.is_authenticated and (current_user.es_admin or current_user.id == p.autor_id) %}
+                      
+                    {% endif %}
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="text-muted mb-0">Aún no tienes publicaciones.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Cursos inscritos -->
+      <div class="col-lg-5">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mb-3">Mis cursos</h4>
+            {% if cursos_inscritos %}
+              <ul class="list-group list-group-flush">
+                {% for c, fecha_insc in cursos_inscritos %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-0">
+                    <a href="{{ url_for('detalle_curso', curso_id=c.id) }}"><strong>{{ c.titulo }}</strong></a>
+                    <div class="small text-muted">
+                      Inscrito: {{ fecha_insc.strftime('%d/%m/%Y') if fecha_insc else '' }}
+                    </div>
+                  </div>
+                  <div class="ms-3">
+                    <a class="btn btn-sm btn-outline-success" href="{{ url_for('curso_contenido', curso_id=c.id) }}">Ir al curso</a>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="text-muted mb-0">Aún no te has inscrito en ningún curso.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

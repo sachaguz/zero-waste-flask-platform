@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Zero Waste | Social Media Network Template</title>
+	
+    <link rel="icon" href="{{ url_for('static', filename='img/logost.png') }}" type="image/png" sizes="16x16">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}">
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+<div class="page-loader" id="page-loader">
+
+  <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+
+</div><!-- page loader -->
+<div class="theme-layout">
+
+	<div class="responsive-header">
+		
+
+<!-- Responsive header -->
+<div class="logo res">
+  <img 
+    class="site-logo"
+    src="{{ url_for('static', filename='img/logost.png') }}"
+    data-light="{{ url_for('static', filename='img/logost.png') }}"
+    data-dark="{{ url_for('static', filename='img/logost.png') }}"
+    alt="Zero Waste">
+  
+</div>
+
+
+		<div class="user-avatar mobile">
+			<a href="{{ url_for('profile') }}" title="Perfil de usuario"><img alt="" src="images/resources/user.jpg"></a>
+			
+		</div>
+		<div class="right-compact">
+			<div class="sidemenu">
+				<i>
+<svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+			</div>
+			
+			
+		</div>
+		<div class="restop-search">
+			<span class="hide-search"><i class="icofont-close-circled"></i></span>
+			<form method="post">
+				<input type="text" placeholder="Buscar...">
+			</form>
+		</div>
+	</div><!-- responsive header -->
+	
+	<header class="">
+		<div class="topbar stick">
+			<!-- Header principal -->
+<div class="logo">
+  <img 
+    class="site-logo"
+    src="{{ url_for('static', filename='img/logost.png') }}"
+    data-light="{{ url_for('static', filename='img/logost.png') }}"
+    data-dark="{{ url_for('static', filename='img/logost.png') }}"
+    alt="Zero Waste">
+  <span>Zero Waste</span>
+</div>			<div class="searches">
+				<form method="get" action="{{ url_for('buscar') }}">
+		<input type="text" name="q" placeholder="Buscar...">
+		<button type="submit"><i class="icofont-search"></i></button>
+		<span class="cancel-search"><i class="icofont-close"></i></span>
+				</form>
+			</div>
+			
+			<ul class="web-elements">
+				<li>
+	{% if current_user.is_authenticated %}
+		<div class="user-dp">
+			<a href="#" title="">
+				<img alt="" src="{{ url_for('static', filename='images/p9.png') }}">
+				<div class="name">
+					<h4>{{ current_user.nombre }}</h4>
+				</div>
+			</a>
+		</div>
+	{% else %}
+		<div class="user-dp"><a href="{{ url_for('login') }}" title=""><div class="name"><h4>Iniciar sesión</h4></div></a></div>
+	{% endif %}
+</li>
+
+				<!--<li class="go-live">
+					<a href="live-stream.html" title="Go Live" data-toggle="tooltip">
+						<i>
+<svg fill="#f00" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" width="18px" height="18px"><path d="M 6.1015625 6.1015625 C 3.5675625 8.6345625 2 12.134 2 16 C 2 19.866 3.5675625 23.365437 6.1015625 25.898438 L 7.5195312 24.480469 C 5.3465312 22.307469 4 19.308 4 16 C 4 12.692 5.3465312 9.6925313 7.5195312 7.5195312 L 6.1015625 6.1015625 z M 25.898438 6.1015625 L 24.480469 7.5195312 C 26.653469 9.6925312 28 12.692 28 16 C 28 19.308 26.653469 22.307469 24.480469 24.480469 L 25.898438 25.898438 C 28.432437 23.365437 30 19.866 30 16 C 30 12.134 28.432437 8.6345625 25.898438 6.1015625 z M 9.6367188 9.6367188 C 8.0077188 11.265719 7 13.515 7 16 C 7 18.485 8.0077187 20.734281 9.6367188 22.363281 L 11.052734 20.947266 C 9.7847344 19.680266 9 17.93 9 16 C 9 14.07 9.7847344 12.319734 11.052734 11.052734 L 9.6367188 9.6367188 z M 22.363281 9.6367188 L 20.947266 11.052734 C 22.215266 12.319734 23 14.07 23 16 C 23 17.93 22.215266 19.680266 20.947266 20.947266 L 22.363281 22.363281 C 23.992281 20.734281 25 18.485 25 16 C 25 13.515 23.992281 11.265719 22.363281 9.6367188 z M 16 12 A 4 4 0 0 0 16 20 A 4 4 0 0 0 16 12 z"/></svg></i>
+					</a>
+				</li>-->
+				<li>
+  <a href="{{ url_for('home') }}" title="Home" data-toggle="tooltip">
+    <i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+    </i>
+  </a>
+</li>
+
+				<!--<li>
+					<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
+						<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
+					</a>
+					<span></span>
+				</li>-->
+				<!--<li>
+					<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
+						<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
+					</a>
+					<span></span>
+				</li>-->
+				<!--<li>
+					<a class="create" href="#" title="Add New" data-toggle="tooltip">
+						<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
+					</a>
+				</li>-->
+				<li>
+					<a href="#" title="">
+						<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+						</i>
+					</a>
+					<ul class="dropdown">
+						{% if current_user.is_authenticated %}<li><a href="{{ url_for('profile') }}" title="Mi Perfil" data-toggle="tooltip"><i class="icofont-user-alt-3"></i> Tu Perfil</a></li>{% endif %}
+						<!--<li><a href="add-new-course.html" title=""><i class="icofont-plus"></i> Nuevo Curso</a></li>-->
+						<!--<li><a class="invite-new" href="#" title=""><i class="icofont-brand-slideshare"></i> Inivtar Colegas</a></li>-->
+						<!--<li><a href="pay-out.html" title=""><i class="icofont-price"></i> Payout</a></li>-->
+						<!--<li><a href="price-plan.html" title=""><i class="icofont-flash"></i> Upgrade</a></li>-->
+						<!--<li><a href="help-faq.html" title=""><i class="icofont-question-circle"></i> Ayuda</a></li>
+						<li><a href="settings.html" title=""><i class="icofont-gear"></i> Configuración</a></li>-->
+						<li><a href="{{ url_for('terminos') }}" title="Terminos y Condiciones" data-toggle="tooltip"><i class="icofont-notepad"></i> Privacidad</a></li>
+						<li><a class="dark-mod" href="#" title=""><i class="icofont-moon"></i> Modo Oscuro</a></li>
+						{% if current_user.is_authenticated and current_user.es_admin %}
+<li>
+  <a href="{{ url_for('powerbi_dashboard') }}" title="">
+    <i class="icofont-chart-bar-graph"></i> Estadísticas
+  </a>
+</li>
+{% endif %}
+
+						{% if current_user.is_authenticated %}
+<li class="logout">
+	<a href="{{ url_for('logout') }}" title="">
+		<i class="icofont-power"></i> Cerrar Sesión
+	</a>
+</li>
+{% endif %}
+
+
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</header><!-- header -->
+	
+	<nav class="sidebar">
+		<ul class="menu-slide">
+			<!--<li class="active menu-item-has-children">
+				<a class="" href="#" title="">
+					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Home
+				</a>
+				<ul class="submenu">
+					<li><a href="index.html" title="">Foro</a></li>
+					<li><a href="company-home.html" title="">Company Home</a></li>
+					<li><a href="profile-page2.html" title="">User Profile</a></li>
+					<li><a href="profile.html" title="">Student User Profile</a></li>
+					<li><a href="groups.html" title="">Groups</a></li>
+					<li><a href="group-detail.html" title="">Group Detail</a></li>
+					<li><a href="post-detail.html" title="">Social Post Detail</a></li>
+					<li><a href="messages.html" title="">Chat/Messages</a></li>
+					<li><a href="notifications.html" title="">Notificatioins</a></li>
+					<li><a href="search-result.html" title="">Search Result</a></li>
+				</ul>
+			</li>-->
+			<!--<li class="menu-item-has-children">
+				<a class="" href="#" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i> Features
+				</a>
+				<ul class="submenu">
+					<li><a href="videos.html" title="">Videos</a></li>
+					<li><a href="live-stream.html" title="">Live Stream</a></li>
+					<li><a href="event-page.html" title="">Events Page</a></li>
+					<li><a href="event-detail.html" title="">Event Detail</a></li>
+					<li><a href="Q-A.html" title="">QA</a></li>
+					<li><a href="Q-detail.html" title="">QA Detail</a></li>
+					<li><a href="help-faq.html" title="">Support Help</a></li>
+					<li><a href="help-faq-detail.html" title="">Support Detail</a></li>
+				</ul>
+			</li>
+			
+			<li class="menu-item-has-children">
+				<a class="" href="#" title="">
+					 <i class="">
+<svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i> Market Place
+				</a>
+				<ul class="submenu">
+					<li><a href="profile.html" title="">Books</a></li>
+					<li><a href="book-detail.html" title="">Books Detail</a></li>
+					<li><a href="courses.html" title="">Course</a></li>
+					<li><a href="course-detail.html" title="">course Detail</a></li>
+					<li><a href="add-new-course.html" title="">Add New Course</a></li>
+					<li><a href="product-cart.html" title="">Cart Page</a></li>
+					<li><a href="product-checkout.html" title="">Checkout</a></li>
+					<li><a href="add-credits.html" title="">Add Credit</a></li>
+					<li><a href="pay-out.html" title="">Payouts</a></li>
+					<li><a href="price-plan.html" title="">Pricing Plans</a></li>
+					<li><a href="invoice.html" title="">Invoice</a></li>
+					<li><a href="thank-you.html" title="">Thank you Page</a></li>
+				</ul>
+			</li>
+			<li class="menu-item-has-children">
+				<a class="" href="#" title="">
+					 <i class=""><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+						</i> Blogs
+				</a>
+				<ul class="submenu">
+					<li><a href="blog.html" title="">Blog</a></li>
+					<li><a href="blog-detail.html" title="">Blog Detail</a></li>
+				</ul>
+			</li>
+			<li class="menu-item-has-children">
+				<a class="" href="#" title="">
+					<i><svg id="ab8" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></i> Featured Pages
+				</a>
+				<ul class="submenu">
+					<li><a href="404.html" title="">Error 404</a></li>
+					<li><a href="coming-soon.html" title="">Coming Soon</a></li>
+					<li><a href="send-feedback.html" title="">Send Feedback</a></li>
+					<li><a href="badges.html" title="">Badges</a></li>
+					<li><a href="thank-you.html" title="">Thank You</a></li>
+				</ul>
+			</li>
+			<li class="menu-item-has-children">
+				<a class="" href="#" title="">
+					<i class="">
+					<svg id="ab9" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></i> Authentications
+				</a>
+				<ul class="submenu">
+					<li><a href="sign-in.html" title="">Sign In</a></li>
+					<li><a href="signup.html" title="">Sign Up</a></li>
+					<li><a href="forgot-password.html" title="">Forgot Password</a></li>
+				</ul>
+			</li>-->
+			<li>
+  <a href="{{ url_for('blog') }}" title="Ver entradas del blog">
+    <i>
+      <svg class="feather feather-edit-3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+      </svg>
+    </i> Blog
+  </a>
+</li>
+
+<li>
+  <a href="{{ url_for('cursos') }}" title="Mis cursos">
+    <i>
+      <svg class="feather feather-layers" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    </i> Cursos
+  </a>
+</li>
+
+<li>
+  <a href="{{ url_for('profile') }}" title="Mi perfil">
+    <i>
+      <svg class="feather feather-user-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="8.5" cy="7" r="4" />
+        <polyline points="17 11 19 13 23 9" />
+      </svg>
+    </i> Mi Perfil
+  </a>
+</li>
+
+			<!--<li class="">
+				<a class="" href="settings.html" title=""><i class="">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></i> Web Settings
+				</a>
+			</li>
+			<li class="menu-item-has-children">
+				<a class="#" href="#" title="">
+					<i class="">
+					<svg id="team" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></i> Development Tools
+				</a>
+				<ul class="submenu">
+					<li><a href="widgets.html" title="">Widgets Collection</a></li>
+					<li><a href="development-component.html" title="">Web Component</a></li>
+					<li><a href="development-elements.html" title="">Web Elements</a></li>
+					<li><a href="loader-spiners.html" title="">Loader Spiners</a></li>
+				</ul>
+			</li>-->
+			
+		</ul>
+	</nav><!-- nav sidebar -->
+	
+	<section>
+		<div class="white-bg">
+			<div class="container-fluid">
+				<div class="menu-caro">
+					<div class="row">
+						<div class="col-lg-2">
+							<!--<div class="sidemenu">
+								<i>
+	<svg id="side-menu" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+							</div>-->
+						</div>
+						<div class="col-lg-8">
+							<div class="page-caro">
+								
+								<!--<div class="link-item">
+									<a href="groups.html" title="">
+										<i class="">
+											<svg class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle r="4" cy="7" cx="9"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+										</i>
+										<p>Grupos</p>
+									</a>
+								</div>
+								<div class="link-item">
+									<a href="videos.html" title="">
+										<i class="">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+										</i>
+										<p>Videos</p>
+									</a>
+								</div>-->
+								<div class="link-item">
+									<a class="active" href="{{ url_for('blog') }}" title="">
+										<i class=""><svg class="feather feather-layout" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><rect ry="2" rx="2" height="18" width="18" y="3" x="3"/><line y2="9" x2="21" y1="9" x1="3"/><line y2="9" x2="9" y1="21" x1="9"/></svg></i>
+										
+										<p>Blog</p>
+									</a>
+								</div>
+								<div class="link-item">
+									<a href= "{{ url_for('cursos') }}" title="">
+										<i class="">
+											<svg class="feather feather-airplay" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"/><polygon points="12 15 17 21 7 21 12 15"/></svg></i>
+										<p>Cursos</p>
+									</a>
+								</div>
+								<!--<div class="link-item">
+									<a href="index.html" title="">
+										<i class="">
+											<svg class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+										</i>
+										<p>Campañas Rápidas</p>
+									</a>
+								</div>-->
+								<div class="link-item">
+									<a href="{{ url_for('profile') }}" title="Perfil de usuario">
+										<i class="">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></i>
+										<p>Mi perfil</p>
+									</a>
+								</div>
+								
+								
+							</div>
+						</div>
+						<div class="col-lg-2">
+							<div class="user-inf">
+								<!--<div class="folowerz">Miembros activos: 204</div>
+								<ul class="stars">
+									<li><i class="icofont-star"></i></li>
+									<li><i class="icofont-star"></i></li>
+									<li><i class="icofont-star"></i></li>
+									<li><i class="icofont-star"></i></li>
+									<li><i class="icofont-star"></i></li>
+								</ul>
+							</div>	-->
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>	
+	</section><!-- carousel menu -->
+	<script>
+  (function () {
+    const THEME_KEY = 'zw-theme';
+    const root = document.documentElement;
+    const toggle = document.querySelector('.dark-mod');
+
+    function applyTheme(theme) {
+      // Aplica clase al <html>
+      root.classList.toggle('dark', theme === 'dark');
+      // Cambia los logos
+      document.querySelectorAll('.site-logo').forEach(img => {
+        const light = img.getAttribute('data-light');
+        const dark  = img.getAttribute('data-dark');
+        if (light && dark) {
+          img.src = (theme === 'dark') ? dark : light;
+        }
+      });
+      // (Opcional) cambia icono/texto del botón
+      const icon = toggle?.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('icofont-moon', theme !== 'dark');
+        icon.classList.toggle('icofont-sun', theme === 'dark');
+      }
+      if (toggle) toggle.lastChild.nodeValue = theme === 'dark' ? ' Modo Claro' : ' Modo Oscuro';
+    }
+
+    // Inicializa tema desde localStorage o prefers-color-scheme
+    const saved = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = saved || (prefersDark ? 'dark' : 'light');
+    applyTheme(initial);
+
+    // Click en el botón
+    toggle?.addEventListener('click', function (e) {
+      e.preventDefault();
+      const next = root.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+  })();
+</script>
+    <script src="{{ url_for('static', filename='js/main.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/map-init.js') }}"></script>
+
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

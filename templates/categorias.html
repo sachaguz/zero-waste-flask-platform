@@ -1,0 +1,21 @@
+{% extends "cursos.html" %}
+
+{% block content %}
+<div class="main-wraper">
+    <h4 class="main-title">Cursos de {{ categoria.nombre }}</h4>
+    <div class="row">
+        {% for curso in cursos %}
+        <div class="col-lg-4 col-md-6">
+            <div class="course-card">
+                <img src="{{ url_for('static', filename=curso.imagen) }}" alt="{{ curso.titulo }}">
+                <h5>{{ curso.titulo }}</h5>
+                <p>{{ curso.descripcion[:100] }}...</p>
+                <p><strong>Precio:</strong> ${{ curso.precio }}</p>
+            </div>
+        </div>
+        {% else %}
+        <p>No hay cursos en esta categoría aún.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

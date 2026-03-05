@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Zero Waste | Social Media Network Template</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logost.png') }}" type="image/png" sizes="16x16">
+    
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}">
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+<div class="page-loader" id="page-loader">
+
+  <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+
+</div><!-- page loader -->
+<div class="theme-layout">
+	
+	<div class="authtication bluesh high-opacity">
+		<div class="bg-image"
+     style="background-image: url('{{ url_for('static', filename='img/loginbg.png') }}');">
+</div>
+
+		<ul class="welcome-caro">
+			<li class="welcome-box">
+				<figure>
+  <img
+    src="{{ url_for('static', filename='img/logostosc.png') }}"
+    alt="Hogar Zero Waste"
+    loading="lazy"
+    style="max-width:100%; height:auto;"
+  >
+</figure>
+			
+				
+			</li>
+			<li class="welcome-box">
+				<figure>
+  <img
+    src="{{ url_for('static', filename='img/Hogar Zero Waste.webp') }}"
+    alt="Hogar Zero Waste"
+    loading="lazy"
+    style="max-width:100%; height:auto;"
+  >
+</figure>
+
+				<h4>Crea un hogar sustentable</h4>
+				<p>
+					CREA UN HOGAR ZERO WASTE.
+				</p>
+			</li>
+			<li class="welcome-box">
+				<figure>
+  <img
+    src="{{ url_for('static', filename='img/perfil2.png') }}"
+    alt="Hogar Zero Waste"
+    loading="lazy"
+    style="max-width:100%; height:auto;"
+  >
+</figure>
+				
+				<h4>Encuentra nuevas alianzas</h4>
+				<p>
+					Únete a conocer las campañas y cursos en los que puedes participar.
+				</p>
+			</li>
+			
+			
+		</ul>
+	</div>
+	<div class="auth-login">
+		<div class="logo"><img
+    src="{{ url_for('static', filename='img/logost.png') }}"
+    
+  ><span>Zero Waste</span></div>
+		<div class="mockup left-bottom"><img src="images/mockup.png" alt=""></div>
+		<div class="verticle-center">
+			<div class="login-form">
+				<h4><i class="icofont-key-hole"></i> Inicio de Sesión</h4>
+				<form method="post" class="c-form" action="{{ url_for('login') }}">
+	<div class="fileds">
+		<label class="input-icon">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+				<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+				<circle cx="12" cy="7" r="4"></circle>
+			</svg>
+		</label>
+		<input type="email" name="email" placeholder="Correo electrónico" required>
+	</div>
+
+	<div class="fileds">
+		<label class="input-icon">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
+				<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+				<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+			</svg>
+		</label>
+		<input type="password" name="password" placeholder="Contraseña" required>
+	</div>
+
+	<button class="main-btn" type="submit">
+		<i class="icofont-key"></i> Iniciar sesión
+	</button>
+
+	<p style="margin-top: 10px;">¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a></p>
+</form>
+
+			</div>
+		</div>
+		<div class="mockup right"><img src="images/star-shape.png" alt=""></div>
+	</div>
+	
+</div>
+	
+	<script src="{{ url_for('static', filename='js/main.min.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/map-init.js') }}"></script>
+	
+
+</body>	
+</html>

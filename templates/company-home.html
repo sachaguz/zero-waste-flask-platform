@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Zero Waste | Social Media Network Template</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logost.png') }}" type="image/png" sizes="16x16">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}">
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+	<style>
+  .logo-destacada {
+  text-align: center;
+  margin-top: -200px; /* Ajusta este valor si quieres subir más el logo */
+  margin-bottom: 30px;
+}
+
+.logo-destacada img {
+  width: 300px; /* Cambia el tamaño del logo aquí */
+  height: auto;
+}
+
+</style>
+
+
+</head>
+<body>
+<div class="page-loader" id="page-loader">
+
+  <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+
+</div><!-- page loader -->
+<div class="theme-layout">
+	
+	<div class="responsive-header">
+		<!--<div class="logo res"><img src="{{ url_for('static', filename='img/logost.png') }}" alt="Imagen del post" sizes="8x8"><span>Zero Waste</span></div>-->
+		<div class="user-avatar mobile">
+			
+			<div class="name">
+				<h4>{{ current_user.nombre }}</h4>
+				
+			</div>
+		</div>
+		<div class="right-compact">
+			<div class="sidemenu">
+				<i>
+<svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+			</div>
+			<!--<div class="res-search">
+				<span>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+			</div>-->
+			
+		</div>
+		<!--<div class="restop-search">
+			<span class="hide-search"><i class="icofont-close-circled"></i></span>
+			<form method="post">
+				<input type="text" placeholder="Buscar...">
+			</form>
+		</div>-->
+	</div><!-- responsive header -->
+	
+	<header class="transparent">
+		<div class="topbar">
+			<!--<div class="logo"><img src="{{ url_for('static', filename='img/logost.png') }}" alt="Imagen del post" sizes="8x8"><span>Zero Waste</span></div>-->
+			<!--<div class="searches">
+				<form method="post">
+					<input type="text" placeholder="Buscar...">
+					<button type="submit"><i class="icofont-search"></i></button>
+					<span class="cancel-search"><i class="icofont-close"></i></span>
+					<div class="recent-search">
+						<h4 class="recent-searches">Your's Recent Search</h4>
+						<ul class="so-history">
+							<li>
+								<div class="searched-user">
+									<figure><img src="images/resources/user1.jpg" alt=""></figure>
+									<span>Danial Carabal</span>
+								</div>
+								<span class="trash"><i class="icofont-close-circled"></i></span>
+							</li>
+							<li>
+								<div class="searched-user">
+									<figure><img src="images/resources/user2.jpg" alt=""></figure>
+									<span>Maria K</span>
+								</div>
+								<span class="trash"><i class="icofont-close-circled"></i></span>
+							</li>
+							<li>
+								<div class="searched-user">
+									<figure><img src="images/resources/user3.jpg" alt=""></figure>
+									<span>Fawad Khan</span>
+								</div>
+								<span class="trash"><i class="icofont-close-circled"></i></span>
+							</li>
+							<li>
+								<div class="searched-user">
+									<figure><img src="images/resources/user4.jpg" alt=""></figure>
+									<span>Danial Sandos</span>
+								</div>
+								<span class="trash"><i class="icofont-close-circled"></i></span>
+							</li>
+							<li>
+								<div class="searched-user">
+									<figure><img src="images/resources/user5.jpg" alt=""></figure>
+									<span>Saúl Alejandro</span>
+								</div>
+								<span class="trash"><i class="icofont-close-circled"></i></span>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>-->
+			<ul>
+				<li><a class="join-butn" href="{{ url_for('blog') }}" title="">Ir al Blog</a></li>
+				<li><a class="join-butn" href="{{ url_for('about-us') }}" title="">Sobre Nosotros</a></li>
+				<!--<li><a href="#" title=""><img src="images/flags/US.png" alt=""></a></li>-->
+				{% if current_user.is_authenticated %}
+    <li>
+        <a href="{{ url_for('profile') }}" title="Perfil de usuario">Perfil: {{ current_user.nombre }}</a>
+    </li>
+{% else %}
+    <li>
+        <a href="{{ url_for('login') }}" title="">Iniciar Sesión</a>
+    </li>
+{% endif %}
+
+			</ul>
+		</div>
+	</header>
+	
+	<nav class="sidebar">
+		<ul class="menu-slide">
+			
+			<li>
+  <a href="{{ url_for('blog') }}" title="Ver entradas del blog">
+    <i>
+      <svg class="feather feather-edit-3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+      </svg>
+    </i> Blog
+  </a>
+</li>
+
+<li>
+  <a href="{{ url_for('cursos') }}" title="Mis cursos">
+    <i>
+      <svg class="feather feather-layers" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    </i> Cursos
+  </a>
+</li>
+
+<li>
+  <a href="{{ url_for('profile') }}" title="Mi perfil">
+    <i>
+      <svg class="feather feather-user-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="8.5" cy="7" r="4" />
+        <polyline points="17 11 19 13 23 9" />
+      </svg>
+    </i> Mi Perfil
+  </a>
+</li>
+			
+		</ul>
+	</nav><!-- nav sidebar -->
+	
+	<section>
+		<div class="gap overlap nogap mate-black low-opacity">
+			<div class="bg-image" style='background-image: url("{{ url_for("static", filename="img/FondoZW.png") }}");'></div>
+
+
+			
+			<div class="feature-meta">
+				<div class="logo-destacada">
+  <img src="{{ url_for('static', filename='img/logostosc.png') }}" alt="Logo ambiental">
+</div>
+
+
+	
+
+				<h1>Descubre tu lado <span> Ambientalista</span> </h1>
+				<h3>y mantente conectado con <span></span></h3>
+				{% if current_user.is_authenticated %}
+					<a href="{{ url_for('blog') }}" title="" class="main-btn" data-ripple="">Únete ahora</a>
+				{% else %}
+					<a href="{{ url_for('login') }}" title="" class="main-btn" data-ripple="">Únete ahora</a>
+				{% endif %}
+			</div>
+		</div>	
+	</section>
+	
+	<!--<section>
+		<div class="gap no-bottom grey-bg nogap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-6">
+						<div class="info-sec">
+							<i class="icofont-checked"></i>
+							<div>
+								<h6>Learn from industry experts</h6>
+								<p>Share your research, collaborate with your peers, and get the support you need to advance your career.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="info-sec">
+							<i class="icofont-play-alt-1"></i>
+							<div>
+								<h6>Find video Course of any topic</h6>
+								<p>Share your research, collaborate with your peers, and get the support you need to advance your career.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="info-sec">
+							<i class="icofont-clock-time"></i>
+							<div>
+								<h6>Go at your own pace</h6>
+								<p>Share your research, collaborate with your peers, and get the support you need to advance your career.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>-->
+	
+	<!--<section>
+		<div class="gap no-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="banner-full">
+							<div class="row">
+								<div class="col-lg-3 col-md-3 col-sm-6">
+									<div class="funfact-counter">
+										<i class="icofont-air-ticket"></i>
+										<span class="counter">599</span>
+										<em>Researchers</em>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6">
+									<div class="funfact-counter">
+										<i class="icofont-network"></i>
+										<span class="counter">299</span>
+										<em>Registered user</em>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6">
+									<div class="funfact-counter">
+										<i class="icofont-network-tower"></i>
+										<span class="counter">600</span>
+										<em>Active People</em>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6">
+									<div class="funfact-counter">
+										<i class="icofont-microphone-alt"></i>
+										<span class="counter">12</span>
+										<em>Post Published</em>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>--><!-- funfacts -->
+	
+	<section>
+		<div class="gap no-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7 col-md-7">
+						<div class="verticle-center">
+							<div class="measure">
+								<i class="icofont-light-bulb"></i>
+								<h2>Reduce tu huella ecológica</h2>
+								<p>
+									Adéntrate a cómo hacerlo con nuestros cursos.
+								</p>
+							</div>
+						</div>	
+					</div>
+					<div class="col-lg-5 col-md-5">
+						<figure class="side-image">
+							<img src="{{ url_for('static', filename='img/perfil2.png') }}" alt="Imagen del post" sizes="8x8">
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-5">
+						<figure class="side-image">
+							<img src="{{ url_for('static', filename='img/blog4.jpg') }}" alt="Imagen del post" sizes="8x8">
+						</figure>
+					</div>
+					<div class="col-lg-7 col-md-7">
+						<div class="verticle-center">
+							<div class="measure right">
+								<i class="icofont-connection"></i>
+								<h2>Visita nuestro Blog y aprende de:</h2>
+								<p>
+									<a href="#" title="">Reciclaje</a>
+									<a href="#" title="">Sostenibilidad</a>
+									<a href="#" title="">Medio Ambiente</a>
+									<a href="#" title="">Reutilización</a>
+									<a href="#" title="">Agentes de Cambio</a>
+									
+								</p>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--
+	<section>
+		<div class="gap mate-black low-opacity">
+			<div class="bg-image" style="background-image: url(images/resources/paralex-bg.jpg)" data-velocity=".2"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="welcome-parallax">
+							<i><img src="images/tv-icon.png" alt=""></i>
+							<h2>Advance your research</h2>
+							<span>Join our community of scientists.</span>
+							<a href="#" title="" class="main-btn" data-ripple="">Join Free Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>--><!-- parallax section -->
+	
+	<!--<section>
+		<div class="gap">
+			<div class="container">
+				<div class="row remove-ext30">
+					<div class="col-lg-12">
+						<div class="title">
+							<h1>Recent Events</h1>
+							<p>Our Recent News about the events.</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="blog-grid">
+							<figure><img src="images/resources/blog.jpg" alt=""></figure>
+							<div class="blog-meta">
+								<div class="blog-head">
+									<ul class="postby">
+										<li>
+											<figure><img src="images/resources/postby1.jpg" alt=""></figure> 
+											<span>Saden joe</span>
+										</li>
+										<li><i class="icofont-heart"></i><span>1.3k</span></li>
+									</ul>
+									<a href="#" title="" class="date">06 Aug</a>
+									<h4 class="blog-title"><a href="#" title="">Oddo is coming to dubai in 2020</a></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="blog-grid">
+							<figure><img src="images/resources/blog2.jpg" alt=""></figure>
+							<div class="blog-meta">
+								<div class="blog-head">
+									<ul class="postby">
+										<li>
+											<figure><img src="images/resources/postby2.jpg" alt=""></figure> 
+											<span>Andrew</span>
+										</li>
+										<li><i class="icofont-heart"></i><span>1.3k</span></li>
+									</ul>
+									<a href="#" title="" class="date">08 Sep</a>
+									<h4 class="blog-title"><a href="#" title="">Coming soon event by Microsoft</a></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="blog-grid">
+							<figure><img src="images/resources/blog3.jpg" alt=""></figure>
+							<div class="blog-meta">
+								<div class="blog-head">
+									<ul class="postby">
+										<li>
+											<figure><img src="images/resources/postby3.jpg" alt=""></figure> 
+											<span>Emma Lucy</span>
+										</li>
+										<li><i class="icofont-heart"></i><span>1.3k</span></li>
+									</ul>
+									<a href="#" title="" class="date">12 Oct</a>
+									<h4 class="blog-title"><a href="#" title="">This year Whatsapp event is ready in July</a></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>--><!-- events -->
+	
+	<!--<section>
+		<div class="gap no-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="newsletter-sec">
+							<figure><img src="images/news-icon.png" alt=""></figure>
+							<div class="leter-meta">
+								<span>our newsletter</span>
+								<h3>subscribe now</h3>
+							</div>	
+							<form method="post">
+								<input type="text" placeholder="Email @">
+								<button type="submit" class="main-btn" data-ripple=""><i class="icofont-paper-plane"></i></button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>-->
+	
+	<!--<section>
+		<div class="gap no-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="title">
+							<h1>What our Students Have Today!</h1>
+							<p>Our Researchers have today now?</p>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="student-review">
+							<div class="review-item">
+								<figure><img src="images/resources/commenter-1.jpg" alt=""></figure>
+								<h6>Emma Watson</h6>
+								<span>Student of Botony</span>
+								<p>
+									Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus.	 
+								</p>
+							</div>
+							<div class="review-item">
+								<figure><img src="images/resources/commenter-2.jpg" alt=""></figure>
+								<h6>Emma Watson</h6>
+								<span>Student of Botony</span>
+								<p>
+									Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus.	 
+								</p>
+							</div>
+							<div class="review-item">
+								<figure><img src="images/resources/commenter-3.jpg" alt=""></figure>
+								<h6>Emma Watson</h6>
+								<span>Student of Botony</span>
+								<p>
+									Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus.	 
+								</p>
+							</div>
+							<div class="review-item">
+								<figure><img src="images/resources/commenter-1.jpg" alt=""></figure>
+								<h6>Emma Watson</h6>
+								<span>Student of Botony</span>
+								<p>
+									Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus.	 
+								</p>
+							</div>
+							<div class="review-item">
+								<figure><img src="images/resources/commenter-2.jpg" alt=""></figure>
+								<h6>Emma Watson</h6>
+								<span>Student of Botony</span>
+								<p>
+									Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus.	 
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>-->
+	
+	<footer>
+		<div class="gap">
+			<div class="bg-image" style="background-image: url(images/resources/footer-bg.png)"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="web-info">
+							<!-- Header principal -->
+
+  <img 
+    class="site-logo"
+    src="{{ url_for('static', filename='img/logost.png') }}"
+    data-light="{{ url_for('static', filename='img/logost.png') }}"
+    data-dark="{{ url_for('static', filename='img/logost.png') }}"
+    alt="Zero Waste">
+
+
+							<!--<p>Subscribe our newsletter for getting notifications and alerts</p>
+							<div class="contact-little">
+								<span><i class="icofont-phone-circle"></i> +1-235-099-34</span>
+								<span><i class="icofont-email"></i> info@akedmic.com</span>
+							</div>-->
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3">
+						<div class="widget">
+							<div class="widget-title">
+								<h4>Compañía</h4>
+							</div>
+							<ul class="quick-links">
+								<li><a class="join-butn" href="{{ url_for('about-us') }}" title="">Sobre Nosotros</a></li>
+								<!--<li><a href="#" title="">Career</a></li>-->
+								<li><a class="join-butn" href="{{ url_for('terminos') }}" title="">Privacidad</a></li>
+								<li><a class="join-butn" href="{{ url_for('terminos') }}" title="">Términos y Condiciones</a></li>
+								<!--<li><a href="#" title="">FAQ</a></li>-->
+								<!--<li><a href="#" title="">Contact</a></li>-->
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3">
+						<div class="widget">
+							<div class="widget-title">
+								<h4>Links Rápidos</h4>
+							</div>
+							<ul class="quick-links">
+								<!--<li><a href="#" title="">Product</a></li>
+								<li><a href="#" title="">Market</a></li>-->
+								<li><a href="{{ url_for('home') }}" title="">Menú Principal</a></li>
+								<li><a href="{{ url_for('blog') }}" title="">Blog</a></li>
+								<li><a href="{{ url_for('cursos') }}" title="">Cursos</a></li>
+								<!--<li><a href="#" title="">Services</a></li>
+								<li><a href="#" title="">Enterprise</a></li>
+								<li><a href="#" title="">Sitemap</a></li>-->
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3">
+						<div class="widget">
+							<div class="widget-title">
+								<h4>Síguenos</h4>
+							</div>
+							<ul class="quick-links">
+								<!--<li><a href="#" title=""><i class="icofont-facebook"></i>facebook</a></li>
+								<li><a href="#" title=""><i class="icofont-twitter"></i>twitter</a></li>-->
+								<li><a href="https://www.instagram.com/zerowaste_upq/?hl=es-la" title=""><i class="icofont-instagram"></i>instagram</a></li>
+								<!--<li><a href="#" title=""><i class="icofont-google-plus"></i>google +</a></li>
+								<li><a href="#" title=""><i class="icofont-whatsapp"></i>whatsapp</a></li>
+								<li><a href="#" title=""><i class="icofont-reddit"></i>reddit</a></li>-->
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="web-info">
+							<!-- Header principal -->
+
+  <img 
+    class="site-logo"
+    src="{{ url_for('static', filename='img/logost.png') }}"
+    data-light="{{ url_for('static', filename='img/logost.png') }}"
+    data-dark="{{ url_for('static', filename='img/logost.png') }}"
+    alt="Zero Waste">
+
+
+							<!--<p>Subscribe our newsletter for getting notifications and alerts</p>
+							<div class="contact-little">
+								<span><i class="icofont-phone-circle"></i> +1-235-099-34</span>
+								<span><i class="icofont-email"></i> info@akedmic.com</span>
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!-- footer -->
+	
+	<div class="bottombar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="">&copy; Todos los derechos de copyright reservados por Zero Waste 2025</span>
+				</div>
+			</div>
+		</div>
+	</div><!-- bottombar -->			<!-- bottombar -->
+	
+</div>
+	
+	<script>
+  (function () {
+    const THEME_KEY = 'zw-theme';
+    const root = document.documentElement;
+    const toggle = document.querySelector('.dark-mod');
+
+    function applyTheme(theme) {
+      // Aplica clase al <html>
+      root.classList.toggle('dark', theme === 'dark');
+      // Cambia los logos
+      document.querySelectorAll('.site-logo').forEach(img => {
+        const light = img.getAttribute('data-light');
+        const dark  = img.getAttribute('data-dark');
+        if (light && dark) {
+          img.src = (theme === 'dark') ? dark : light;
+        }
+      });
+      // (Opcional) cambia icono/texto del botón
+      const icon = toggle?.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('icofont-moon', theme !== 'dark');
+        icon.classList.toggle('icofont-sun', theme === 'dark');
+      }
+      if (toggle) toggle.lastChild.nodeValue = theme === 'dark' ? ' Modo Claro' : ' Modo Oscuro';
+    }
+
+    // Inicializa tema desde localStorage o prefers-color-scheme
+    const saved = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = saved || (prefersDark ? 'dark' : 'light');
+    applyTheme(initial);
+
+    // Click en el botón
+    toggle?.addEventListener('click', function (e) {
+      e.preventDefault();
+      const next = root.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+  })();
+</script>
+	<script src="{{ url_for('static', filename='js/main.min.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/counterup.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/typed.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/counterup-t-waypoint.js') }}"></script>
+
+</body>	
+</html>

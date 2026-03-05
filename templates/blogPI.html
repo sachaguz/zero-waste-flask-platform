@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <title>Zero Waste | Blog</title>
+
+  <link rel="icon" href="{{ url_for('static', filename='images/logo sin texto.png') }}" type="image/png" sizes="16x16">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+
+  <div class="page-loader" id="page-loader">
+    <div class="loader">
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+    </div>
+  </div>
+
+  <div class="theme-layout">
+
+    <!-- Aquí comienza la sección del blog -->
+    <section>
+      <div class="gap gray-bg">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              
+              {% for post in posts %}
+              <div class="central-meta item">
+                <div class="user-post">
+                  <div class="friend-info">
+                    <figure>
+                      <img src="{{ url_for('static', filename='images/resources/blog-author.jpg') }}" alt="">
+                    </figure>
+                    <div class="friend-name">
+                      <ins><a href="#" title="">{{ post.autor }}</a></ins>
+                      <span>Publicado el {{ post.fecha.strftime('%d/%m/%Y') }}</span>
+                    </div>
+                    <div class="post-meta">
+                      <h4>{{ post.titulo }}</h4>
+                      <p>{{ post.contenido }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/main.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/map-init.js') }}"></script>
+
+</body>
+</html>

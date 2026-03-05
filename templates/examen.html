@@ -1,0 +1,352 @@
+<div id="exam-evo">
+  <!-- Banner / header -->
+  <div class="evo-hero">
+    <div class="evo-hero-inner">
+      <div>
+        <div class="evo-eyebrow">Examen Final</div>
+        <h1 class="evo-title">{{ curso.titulo }}</h1>
+        <p class="evo-subtitle">Apruebas con <strong>8.0</strong>. Responde todas las preguntas.</p>
+      </div>
+      <div class="evo-badges">
+        <span class="evo-badge-info">Intentos restantes: <strong>{{ intentos_restantes }}</strong></span>
+      </div>
+    </div>
+
+    <!-- Progreso -->
+    <div class="evo-progress">
+      <div class="evo-progress-bar" id="evo-progress-bar" style="width:0%"></div>
+    </div>
+    <div class="evo-progress-meta">
+      <span id="evo-progress-text">0%</span> completado
+    </div>
+  </div>
+
+  <div class="row evo-grid">
+    <!-- Preguntas -->
+    <div class="col-lg-9">
+      <form id="form-examen" method="POST" action="{{ url_for('examen', curso_id=curso.id) }}">
+        {# {{ csrf_token() }} #}
+
+        {% for p in preguntas %}
+        <section class="evo-card evo-question" id="q-{{ loop.index }}" data-qindex="{{ loop.index }}">
+          <header class="evo-card-head">
+            <span class="evo-chip">#{{ loop.index }}</span>
+            <div class="evo-head-right">{{ loop.index }} / {{ preguntas|length }}</div>
+          </header>
+
+          <h2 class="evo-question-title">{{ p.enunciado }}</h2>
+
+          {% set opciones = [('A', p.opcion_a), ('B', p.opcion_b), ('C', p.opcion_c), ('D', p.opcion_d)] %}
+          <div class="evo-options">
+            {% for letra, texto in opciones %}
+            <div class="evo-option">
+              <input
+                class="evo-radio"
+                type="radio"
+                id="pregunta_{{ p.id }}_{{ letra }}"
+                name="pregunta_{{ p.id }}"
+                value="{{ letra }}"
+                required
+              >
+              <label class="evo-tile" for="pregunta_{{ p.id }}_{{ letra }}" tabindex="0">
+                <span class="evo-tile-badge">{{ letra }}</span>
+                <span class="evo-tile-text">{{ texto }}</span>
+                <span class="evo-tile-check" aria-hidden="true">✓</span>
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
+
+        <!-- Barra de envío flotante -->
+        <div class="evo-submit" id="evo-submit">
+          <div class="evo-submit-inner">
+            <div class="evo-submit-hint">Revisa tus respuestas antes de enviar. Se registrará este intento.</div>
+            <div class="evo-submit-actions">
+              <button type="submit" id="btn-enviar-examen" class="evo-btn evo-btn-primary">
+                Enviar respuestas
+              </button>
+              <div id="enviando-spinner" class="evo-spinner" hidden>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <small>Enviando…</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Resumen lateral -->
+    <aside class="col-lg-3">
+      <div class="evo-card">
+        <div class="evo-card-body">
+          <div class="evo-card-title-sm">Resumen</div>
+          <div id="evo-summary" class="evo-dots">
+            {% for p in preguntas %}
+            <a href="#q-{{ loop.index }}" class="evo-dot" data-qindex="{{ loop.index }}" title="Ir a la {{ loop.index }}">
+              {{ loop.index }}
+            </a>
+            {% endfor %}
+          </div>
+          <hr class="evo-hr">
+          <small class="evo-muted">Tip: usa <b>A/B/C/D</b> o <b>1‑4</b> para responder rápido.</small>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style>
+  /* ===========================
+     EXAM EVO — SCOPE TOTAL
+  ============================ */
+  #exam-evo {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --txt: #1c1f23;
+    --muted: #6b7280;
+    --border: #e6e8eb;
+    --ring: rgba(13,110,253,.22);
+    --ok: #2e7d32;
+    --ok-soft: #e8f7ee;
+    --ok-line: #cdebd7;
+    --grad-1: #0ea5e9;
+    --grad-2: #10b981;
+    --shadow: 0 10px 25px rgba(0,0,0,.06);
+  }
+  html.dark #exam-evo {
+    --bg: #0f1216;
+    --card: #14191f;
+    --txt: #e5e7eb;
+    --muted: #9aa4af;
+    --border: #253042;
+    --ring: rgba(56,189,248,.25);
+    --ok: #4cd36a;
+    --ok-soft: #102116;
+    --ok-line: #285937;
+    --grad-1: #38bdf8;
+    --grad-2: #34d399;
+    --shadow: 0 16px 28px rgba(0,0,0,.35);
+  }
+
+  #exam-evo .evo-hero {
+    border-radius: 18px;
+    padding: 28px;
+    background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+    color: #fff;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  #exam-evo .evo-hero-inner {
+    display:flex; align-items:flex-end; justify-content:space-between; gap:20px;
+    margin-bottom: 14px;
+  }
+  #exam-evo .evo-eyebrow { opacity:.9; font-weight:600; letter-spacing:.4px; text-transform:uppercase; font-size:.75rem; }
+  #exam-evo .evo-title { margin:6px 0 2px; font-size:1.6rem; font-weight:800; line-height:1.2; }
+  #exam-evo .evo-subtitle { margin:0; opacity:.95; }
+  #exam-evo .evo-badge-info {
+    display:inline-flex; align-items:center; gap:.5rem;
+    background: rgba(255,255,255,.18); color:#fff;
+    border: 1px solid rgba(255,255,255,.3);
+    padding: .5rem .75rem; border-radius: 999px; font-weight:600;
+    backdrop-filter: blur(6px);
+  }
+
+  /* Progreso */
+  #exam-evo .evo-progress { width:100%; height: 10px; background: rgba(255,255,255,.25); border-radius:999px; overflow:hidden; }
+  #exam-evo .evo-progress-bar { height:100%; background: #fff; border-radius:999px; transition: width .25s ease; }
+  #exam-evo .evo-progress-meta { margin-top:8px; font-size:.85rem; opacity:.9; }
+
+  /* Layout */
+  #exam-evo .evo-grid { margin-top: 18px; }
+
+  /* Card base */
+  #exam-evo .evo-card {
+    background: var(--card);
+    color: var(--txt);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 22px;
+  }
+  #exam-evo .evo-card-head {
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 18px 0 18px;
+  }
+  #exam-evo .evo-card-body { padding: 18px; }
+  #exam-evo .evo-card-title-sm { font-weight:700; margin-bottom:12px; }
+  #exam-evo .evo-hr { border:0; border-top:1px solid var(--border); margin: 14px 0; }
+  #exam-evo .evo-muted { color: var(--muted); }
+
+  /* Chip y encabezado pregunta */
+  #exam-evo .evo-chip { background: var(--ok-soft); color: var(--ok); border:1px solid var(--ok-line); font-weight:700;
+    padding: 4px 10px; border-radius:999px; }
+  #exam-evo .evo-head-right { color: var(--muted); font-weight:600; }
+  #exam-evo .evo-question-title { padding: 12px 18px; margin: 0; font-size:1.1rem; font-weight:700; }
+
+  /* Opciones */
+  #exam-evo .evo-options { display:grid; gap: 12px; grid-template-columns:1fr; padding: 0 18px 18px; }
+  @media (min-width: 768px){ #exam-evo .evo-options{ grid-template-columns:1fr 1fr; } }
+
+  #exam-evo .evo-option { position:relative; }
+  #exam-evo .evo-radio { position:absolute; opacity:0; pointer-events:none; }
+
+  #exam-evo .evo-tile{
+    display:grid; grid-template-columns:44px 1fr 24px; gap:12px; align-items:center;
+    border: 1px solid var(--border); border-radius: 14px; background: var(--bg);
+    padding: 12px 14px; cursor:pointer; transition: transform .05s, box-shadow .2s, border-color .2s, background .2s;
+    outline: none;
+  }
+  #exam-evo .evo-tile:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+  #exam-evo .evo-tile:focus-visible { box-shadow: 0 0 0 4px var(--ring); }
+
+  #exam-evo .evo-tile-badge{
+    display:inline-flex; width:44px; height:44px; align-items:center; justify-content:center;
+    border-radius:12px; font-weight:800; background:#f5f7fa; color:#343a40; border:1px solid var(--border);
+  }
+  html.dark #exam-evo .evo-tile-badge{ background:#1a2027; color:#d1d5db; }
+
+  #exam-evo .evo-tile-text{ line-height:1.35; }
+  #exam-evo .evo-tile-check{ display:none; font-weight:800; color: var(--ok); }
+
+  /* Checked visual */
+  #exam-evo .evo-radio:checked + .evo-tile{
+    border-color: var(--ok-line); background: var(--ok-soft);
+    box-shadow: 0 0 0 4px rgba(46,125,50,.12);
+  }
+  #exam-evo .evo-radio:checked + .evo-tile .evo-tile-badge{
+    background: var(--ok-soft); color: var(--ok); border-color: var(--ok-line);
+  }
+  #exam-evo .evo-radio:checked + .evo-tile .evo-tile-check{ display:inline-block; }
+
+  /* Dots resumen */
+  #exam-evo .evo-dots { display:flex; flex-wrap:wrap; gap:8px; }
+  #exam-evo .evo-dot {
+    width:40px; height:40px; border:1px solid var(--border); border-radius:12px;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight:800; color: var(--muted); text-decoration:none; background: var(--bg);
+    transition: .15s;
+  }
+  #exam-evo .evo-dot:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.08); color: var(--txt); }
+  #exam-evo .evo-dot.evo-answered{ background: var(--ok-soft); color: var(--ok); border-color: var(--ok-line); }
+  #exam-evo .evo-dot.evo-current{ border-color:#0d6efd; color:#0d6efd; }
+
+  /* Barra de envío flotante */
+  #exam-evo .evo-submit{
+    position: sticky; bottom: 16px; margin-top: 16px;
+    z-index: 25; border-radius: 16px; border:1px solid var(--border); background: var(--card);
+    box-shadow: var(--shadow);
+  }
+  #exam-evo .evo-submit-inner{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 12px 16px;
+  }
+  #exam-evo .evo-submit-hint{ color: var(--muted); font-size:.95rem; display:none; }
+  @media (min-width:992px){ #exam-evo .evo-submit-hint{ display:block; } }
+
+  #exam-evo .evo-btn{
+    appearance:none; border:0; border-radius: 12px; padding: 10px 16px; font-weight:700; cursor:pointer;
+    transition: transform .05s, box-shadow .2s, filter .2s;
+  }
+  #exam-evo .evo-btn-primary{
+    color:#fff; background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+    box-shadow: 0 10px 22px rgba(0,0,0,.15);
+  }
+  #exam-evo .evo-btn-primary:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+  #exam-evo .evo-btn[disabled]{ opacity:.65; cursor:not-allowed; }
+
+  #exam-evo .evo-spinner{ display:inline-flex; align-items:center; gap:8px; margin-left:10px; }
+</style>
+
+<script>
+(function(){
+  const root = document.getElementById('exam-evo');
+  if(!root) return;
+
+  const form = root.querySelector('#form-examen');
+  const btn  = root.querySelector('#btn-enviar-examen');
+  const spin = root.querySelector('#enviando-spinner');
+  const dots = root.querySelectorAll('.evo-dot');
+  const cards= root.querySelectorAll('.evo-question');
+  const bar  = root.querySelector('#evo-progress-bar');
+  const txt  = root.querySelector('#evo-progress-text');
+
+  function refresh(){
+    const total = cards.length;
+    let answered = 0;
+    dots.forEach(dot=>{
+      const idx = dot.dataset.qindex;
+      const card = root.querySelector('#q-'+idx);
+      const checked = card && card.querySelector('input[type="radio"]:checked');
+      dot.classList.toggle('evo-answered', !!checked);
+      if(checked) answered++;
+    });
+    const pct = total ? Math.round((answered/total)*100) : 0;
+    if(bar){ bar.style.width = pct+'%'; }
+    if(txt){ txt.textContent = pct+'%'; }
+  }
+
+  // Resaltar pregunta visible
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const id = e.target.id; // q-#
+      const idx = id?.split('-')[1];
+      if(!idx) return;
+      root.querySelectorAll('.evo-dot').forEach(d=>d.classList.remove('evo-current'));
+      const dot = root.querySelector('.evo-dot[data-qindex="'+idx+'"]');
+      if(dot && e.isIntersecting) dot.classList.add('evo-current');
+    });
+  }, { rootMargin:'-40% 0px -50% 0px', threshold:0 });
+
+  cards.forEach(c=>io.observe(c));
+
+  // Navegación suave desde dots
+  dots.forEach(d=>{
+    d.addEventListener('click', (ev)=>{
+      const href = d.getAttribute('href');
+      if(href?.startsWith('#')){
+        ev.preventDefault();
+        root.querySelector(href)?.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  // Marcar y avanzar
+  root.addEventListener('change', (e)=>{
+    if(e.target.matches('.evo-radio')){
+      refresh();
+      const card = e.target.closest('.evo-question');
+      const next = card?.nextElementSibling?.classList.contains('evo-question') ? card.nextElementSibling : null;
+      next && next.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+
+  // Atajos A/B/C/D o 1/2/3/4
+  document.addEventListener('keydown', (e)=>{
+    const k = (e.key||'').toLowerCase();
+    const map = {a:'A',b:'B',c:'C',d:'D','1':'A','2':'B','3':'C','4':'D'};
+    if(!(k in map)) return;
+
+    // Tarjeta más centrada
+    let min=1e9, targetCard=null;
+    cards.forEach(c=>{
+      const r=c.getBoundingClientRect(); const center=r.top+r.height/2;
+      const delta = Math.abs(center - window.innerHeight/2);
+      if(delta<min){ min=delta; targetCard=c; }
+    });
+    if(!targetCard) return;
+    const input = targetCard.querySelector('input[value="'+map[k]+'"]');
+    if(input){ input.checked=true; input.dispatchEvent(new Event('change', {bubbles:true})); }
+  }, {passive:true});
+
+  // Submit UX
+  form?.addEventListener('submit', ()=>{
+    if(btn) btn.disabled = true;
+    if(spin) spin.hidden = false;
+  });
+
+  // Init
+  refresh();
+})();
+</script>

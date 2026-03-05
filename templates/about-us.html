@@ -1,0 +1,210 @@
+{% extends "header.html" %}
+
+{% block title %}Sobre nosotros{% endblock %}
+
+{% block content %}
+<!-- Hero / Encabezado -->
+<section class="py-5" style="background:#f8fafc;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-7">
+        <h1 class="mb-3" style="color:#000000;">Sobre <span style="color:#10b981;">Zero Waste</span></h1>
+        <p class="lead mb-4" style="color:#000000;">
+          Somos una plataforma dedicada a impulsar la sostenibilidad a través de cursos, campañas y una comunidad activa.
+          Creemos que el cambio inicia con la educación y la acción cotidiana.
+        </p>
+        <a href="{{ url_for('cursos') }}" class="btn btn-success px-4 py-2">Explorar cursos</a>
+      </div>
+      <div class="col-lg-5 col-md-5 text-center">
+        <img src="{{ url_for('static', filename='img/logost.png') }}" alt="Zero Waste"
+             class="img-fluid" style="max-height: 320px; object-fit: contain;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Misión / Visión -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6 col-sm-6 col-md-6">
+        <div class="p-4 h-100" style="background:#f8fafc; border-radius:16px;">
+          <h3 class="mb-3">Nuestra misión</h3>
+          <p class="mb-0">
+            Democratizar el acceso a la educación ambiental y brindar herramientas prácticas
+            para que personas y organizaciones reduzcan su huella ecológica.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-6 col-md-6">
+        <div class="p-4 h-100" style="background:#f8fafc; border-radius:16px;">
+          <h3 class="mb-3">Nuestra visión</h3>
+          <p class="mb-0">
+            Construir una red global que adopte hábitos circulares y convierta la sostenibilidad
+            en el estándar de cualquier actividad cotidiana.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Valores -->
+<section class="py-5" style="background:#f1f5f9;">
+  <div class="container">
+    <h2 class="mb-4 text-center">Nuestros valores</h2>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <h5 class="mb-2">Transparencia</h5>
+          <p class="mb-0">Comunicamos con claridad, medimos y compartimos resultados.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <h5 class="mb-2">Colaboración</h5>
+          <p class="mb-0">Aliados, empresas y comunidad, remando hacia el mismo objetivo.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <h5 class="mb-2">Innovación</h5>
+          <p class="mb-0">Tecnología para impulsar hábitos inteligentes y circulares.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <h5 class="mb-2">Impacto</h5>
+          <p class="mb-0">Acciones medibles que generan cambios reales y duraderos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats --><!--
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4" style="background:#f8fafc; border-radius:16px;">
+          <h3 class="mb-1">+50</h3>
+          <p class="mb-0">Cursos publicados</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4" style="background:#f8fafc; border-radius:16px;">
+          <h3 class="mb-1">+10k</h3>
+          <p class="mb-0">Estudiantes</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4" style="background:#f8fafc; border-radius:16px;">
+          <h3 class="mb-1">+120</h3>
+          <p class="mb-0">Campañas activas</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4" style="background:#f8fafc; border-radius:16px;">
+          <h3 class="mb-1">15</h3>
+          <p class="mb-0">Países con presencia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<!-- Línea de tiempo --><!--
+<section class="py-5" style="background:#f1f5f9;">
+  <div class="container">
+    <h2 class="mb-4 text-center">Nuestra historia</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <small class="text-muted">2019</small>
+          <h5>Primeros pasos</h5>
+          <p class="mb-0">Comunidad piloto y primeros talleres presenciales.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <small class="text-muted">2021</small>
+          <h5>Plataforma online</h5>
+          <p class="mb-0">Lanzamos cursos en línea y certificaciones.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100" style="background:white; border-radius:16px;">
+          <small class="text-muted">2024+</small>
+          <h5>Escalando impacto</h5>
+          <p class="mb-0">Alianzas con universidades y empresas sostenibles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<!-- Equipo --><!--
+<section class="py-5">
+  <div class="container">
+    <h2 class="mb-4 text-center">Conoce al equipo</h2>
+    <div class="row g-4">
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 text-center h-100" style="background:#f8fafc; border-radius:16px;">
+          <img src="{{ url_for('static', filename='img/team-1.jpg') }}" alt="Miembro" class="img-fluid rounded-circle mb-3" style="width:110px;height:110px;object-fit:cover;">
+          <h6 class="mb-1">Alex Rivera</h6>
+          <small class="text-muted d-block mb-2">Director</small>
+          <p class="mb-0">Estrategia y alianzas para amplificar el impacto.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 text-center h-100" style="background:#f8fafc; border-radius:16px;">
+          <img src="{{ url_for('static', filename='img/team-2.jpg') }}" alt="Miembro" class="img-fluid rounded-circle mb-3" style="width:110px;height:110px;object-fit:cover;">
+          <h6 class="mb-1">María López</h6>
+          <small class="text-muted d-block mb-2">Contenidos</small>
+          <p class="mb-0">Diseño instruccional y producción de cursos.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 text-center h-100" style="background:#f8fafc; border-radius:16px;">
+          <img src="{{ url_for('static', filename='img/team-3.jpg') }}" alt="Miembro" class="img-fluid rounded-circle mb-3" style="width:110px;height:110px;object-fit:cover;">
+          <h6 class="mb-1">Daniel Méndez</h6>
+          <small class="text-muted d-block mb-2">Tecnología</small>
+          <p class="mb-0">Infraestructura, datos y nuevas funcionalidades.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 text-center h-100" style="background:#f8fafc; border-radius:16px;">
+          <img src="{{ url_for('static', filename='img/team-4.jpg') }}" alt="Miembro" class="img-fluid rounded-circle mb-3" style="width:110px;height:110px;object-fit:cover;">
+          <h6 class="mb-1">Sofía Torres</h6>
+          <small class="text-muted d-block mb-2">Comunidad</small>
+          <p class="mb-0">Foros, campañas y acompañamiento a estudiantes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<!-- CTA -->
+<section class="py-5" style="background:#0ea5e9;">
+  <div class="container text-center">
+    <h3 class="mb-3" style="color:white;">¿Listo para empezar?</h3>
+    <p class="mb-4" style="color:#e2e8f0;">Descubre cursos, certificaciones y campañas para pasar a la acción.</p>
+    <a href="{{ url_for('cursos') }}" class="btn btn-light px-4 py-2">Ver cursos</a>
+  </div>
+</section>
+<div class="bottombar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="">&copy; Todos los derechos de copyright reservados por Zero Waste 2025</span>
+				</div>
+			</div>
+		</div>
+	</div><!-- bottombar -->
+{% endblock %}
+
