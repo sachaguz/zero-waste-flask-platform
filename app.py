@@ -2,6 +2,7 @@ import os
 import time
 from datetime import datetime
 
+
 from flask import (
     Flask, render_template, request, redirect, url_for,
     flash, abort, send_file
@@ -231,16 +232,14 @@ def get_or_create_certificate(user, curso, calificacion):
     return cert, abs_path
 
 
-# ----------------------------------------------------------------------
 # Config Examen
-# ----------------------------------------------------------------------
+
 MAX_INTENTOS_EXAMEN = 2
 MIN_APROBATORIA = 8.0
 
 
-# ----------------------------------------------------------------------
-# Blog (con soft delete mediante PostTrash)
-# ----------------------------------------------------------------------
+# Blog
+
 @app.route('/blog')
 def blog():
     # Excluye posts en papelera
@@ -264,7 +263,6 @@ def ver_post(post_id):
                         (current_user.es_admin or current_user.id == post.autor_id)):
         abort(404)
 
-    # SUMAR SIEMPRE (sin usar session)
     try:
         (db.session.query(BlogPost)
          .filter(BlogPost.id == post_id)
@@ -344,7 +342,6 @@ def eliminar_post(post_id):
 @app.route('/papelera')
 @login_required
 def papelera():
-    # Solo admin; si quieres permitir autores, cámbialo abajo en restaurar/destruir
     if not current_user.es_admin:
         abort(403)
 
@@ -359,12 +356,10 @@ def papelera():
 
 from sqlalchemy import text
 
-from sqlalchemy import text
-
 @app.route('/posts/<int:post_id>/restore', methods=['POST'], endpoint='restaurar_post')
 @login_required
 def restaurar_post(post_id):
-    # Permisos: admin o autor del post
+    # Permisos, admin o autor del post
     post = BlogPost.query.get_or_404(post_id)
     if not (current_user.es_admin or current_user.id == post.autor_id):
         abort(403)
@@ -382,7 +377,7 @@ def restaurar_post(post_id):
         app.logger.error(f"[RESTORE_FORCE][ERROR] post_id={post_id}: {e}")
         flash("Error al restaurar.", "danger")
 
-    # Vuelve a la papelera (o al detalle si prefieres)
+    # Vuelve a la papelera
     return redirect(url_for('papelera'))
 
 
@@ -455,9 +450,8 @@ def buscar():
     return render_template('resultados_busqueda.html', posts=resultados, consulta=consulta)
 
 
-# ----------------------------------------------------------------------
 # Autenticación
-# ----------------------------------------------------------------------
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -483,7 +477,7 @@ from flask import render_template, request, redirect, url_for, flash
 def register():
     if request.method == 'POST':
         # Datos del formulario
-        nombre = (request.form.get('nombre') or '').strip()                 # alias / nombre corto
+        nombre = (request.form.get('nombre') or '').strip()
         nombre_completo = (request.form.get('nombre_completo') or '').strip()
         estado = (request.form.get('estado') or '').strip()
         email = (request.form.get('email') or '').strip().lower()
@@ -520,7 +514,7 @@ def register():
                 }
             )
 
-        # Email duplicado (check temprano)
+        # Email duplicado
         if User.query.filter_by(email=email).first():
             flash('El correo ya está registrado.', 'danger')
             return render_template(
@@ -533,7 +527,7 @@ def register():
                 }
             )
 
-        # Normalización opcional del país (capitalización sencilla)
+        # Normalización opcional del país
         if estado:
             estado = estado.strip()
             # Si prefieres dejarlo tal cual viene del <select>, comenta la línea siguiente
@@ -600,9 +594,8 @@ def logout():
 
 
 
-# ----------------------------------------------------------------------
 # Power BI (solo admin)
-# ----------------------------------------------------------------------
+
 @app.route('/powerbi')
 @login_required
 def powerbi_dashboard():
@@ -611,9 +604,7 @@ def powerbi_dashboard():
     return render_template("powerbi.html")
 
 
-# ----------------------------------------------------------------------
 # Cursos, detalle y contenidos
-# ----------------------------------------------------------------------
 @app.route('/cursos/categoria/<categoria_nombre>')
 def cursos_por_categoria(categoria_nombre):
     categoria = Categoria.query.filter_by(nombre=categoria_nombre).first_or_404()
@@ -628,7 +619,7 @@ def detalle_curso(curso_id):
     examen = Examen.query.filter_by(curso_id=curso.id).first()
     preguntas = examen.preguntas if examen else []
 
-    # --- NUEVO: saber si ya está inscrito ---
+    # Saber si ya está inscrito
     is_inscrito = False
     if current_user.is_authenticated:
         is_inscrito = InscripcionCurso.query.filter_by(
@@ -642,7 +633,7 @@ def detalle_curso(curso_id):
         lecturas=lecturas,
         examen=examen,
         preguntas=preguntas,
-        is_inscrito=is_inscrito    # << se usa en el botón
+        is_inscrito=is_inscrito
     )
 
 
@@ -767,7 +758,7 @@ def curso_contenido(curso_id):
     capitulos = curso.capitulos if hasattr(curso, 'capitulos') else []
     examen = Examen.query.filter_by(curso_id=curso.id).first()
 
-    # ---------- Alta automática de inscripción ----------
+    # Alta automática de inscripción
     is_inscrito = False
     if current_user.is_authenticated:
         ins = InscripcionCurso.query.filter_by(
@@ -783,8 +774,6 @@ def curso_contenido(curso_id):
                 )
                 db.session.add(ins)
                 db.session.commit()
-                # (Opcional) flash la primera vez
-                # flash('Te inscribiste al curso correctamente.', 'success')
             except IntegrityError:
                 db.session.rollback()
                 # Si hubiera constraint único, evita crash en condición de carrera
@@ -796,7 +785,7 @@ def curso_contenido(curso_id):
         # Si hay registro (nuevo o ya existente), marcamos inscrito
         is_inscrito = True
 
-    # ---------- Lógica de examen / progreso ----------
+    # Lógica de examen / progreso
     curso_aprobado = False
     intentos_restantes = None
     ultima_nota = None
@@ -818,14 +807,11 @@ def curso_contenido(curso_id):
         curso_aprobado=curso_aprobado,
         intentos_restantes=intentos_restantes,
         ultima_nota=ultima_nota,
-        is_inscrito=is_inscrito,   # << por si lo quieres usar en la plantilla
+        is_inscrito=is_inscrito,
     )
 
+#Examen y certificado
 
-
-# ----------------------------------------------------------------------
-# Examen y certificado
-# ----------------------------------------------------------------------
 @app.route('/examen/<int:curso_id>', methods=['GET', 'POST'])
 def examen(curso_id):
     curso = Curso.query.get_or_404(curso_id)
@@ -919,7 +905,7 @@ from sqlalchemy.exc import IntegrityError
 @app.route("/profile", methods=["GET"])
 @login_required
 def profile():
-    # --- Cursos en los que está inscrito el usuario (curso + fecha_inscripcion) ---
+    
     filas = (
         db.session.query(Curso, InscripcionCurso.fecha_inscripcion)
         .join(InscripcionCurso, InscripcionCurso.curso_id == Curso.id)
@@ -961,7 +947,7 @@ def profile():
             "examen_id": examen_id,
         })
 
-    # --- Posts del usuario (excluye papelera con PostTrash) ---
+    # Posts del usuario (excluye papelera con PostTrash)
     mis_posts = (
         db.session.query(BlogPost)
         .filter(BlogPost.autor_id == current_user.id)
@@ -971,19 +957,18 @@ def profile():
         .all()
     )
 
-    # (Opcional) logs de depuración
+    # logs de depuración
     app.logger.info(f"[PROFILE] user={current_user.id} cursos={len(mis_cursos)} posts={len(mis_posts)}")
 
     return render_template(
         "profile.html",
         usuario=current_user,
         mis_posts=mis_posts,
-        mis_cursos=mis_cursos,    # << ¡Ahora sí se envía al template!
+        mis_cursos=mis_cursos,
     )
 
 
 
-# Dos rutas que apuntan al mismo endpoint, para compatibilidad con tu front
 @app.route('/descargar_certificado/<int:curso_id>')
 @app.route('/curso/<int:curso_id>/certificado/descargar', endpoint='descargar_certificado')
 @login_required
@@ -1021,22 +1006,17 @@ def descargar_certificado(curso_id):
     return resp
 
 
-# ----------------------------------------------------------------------
 # Listado de cursos
-# ----------------------------------------------------------------------
 @app.route('/cursos')
 def cursos():
     cursos = Curso.query.all()
     return render_template("courses.html", cursos=cursos, categoria_actual=None)
 
-from flask import redirect, url_for
 
 
 
 
-# ----------------------------------------------------------------------
 # Main
-# ----------------------------------------------------------------------
 if __name__ == '__main__':
     ensure_dirs()
 
