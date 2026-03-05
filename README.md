@@ -59,26 +59,6 @@ Course creators can upload images and PDF documents.
 
 ---
 
-## 📂 Project Structure
-
-```
-zero-waste-flask-platform
-│
-├── static/                # CSS, images and uploaded files
-├── templates/             # HTML templates for the application
-│
-├── app.py                 # Main Flask application
-├── models.py              # Database models
-├── creacurso.py           # Course creation logic
-├── insertar_posts.py      # Blog post management
-├── make_admin.py          # Script to create an administrator
-├── requirements.txt       # Python dependencies
-│
-└── README.md
-```
-
----
-
 ## 💻 Installation
 
 Clone the repository:
@@ -109,38 +89,12 @@ The application will start locally.
 
 ---
 
-## 📸 Screenshots
-
-- Login page
-![Login Page](screenshots/Captura de pantalla 2026-03-05 163642.png)
-
-- Course view  
-- Course chapters  
-- Final exam  
-
-Example format:
-
-
-
----
-
-## 🔮 Future Improvements
-
-Possible future enhancements include:
-
-- Course progress tracking  
-- Improved certificate generation system  
-- Role-based permissions for instructors  
-- Deployment with Docker  
-- Integration with cloud storage for course materials  
-
----
 
 ## 👨‍💻 Author
 
 **Saúl Alejandro Chávez Guzmán**
 
-Backend developer in training with experience in:
+FullStack developer in training with experience in:
 
 - Database design
 - Flask backend development
