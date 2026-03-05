@@ -111,20 +111,16 @@ The application will start locally.
 
 ## 📸 Screenshots
 
-You can add screenshots of the platform interface here.
+- Login page
+![Login Page](screenshots\Captura de pantalla 2026-03-05 163642.png)
 
-Example:
-
-- Login page  
 - Course view  
 - Course chapters  
 - Final exam  
 
 Example format:
 
-```
-![Login Page](screenshots\Captura de pantalla 2026-03-05 163642.png)
-```
+
 
 ---
 
